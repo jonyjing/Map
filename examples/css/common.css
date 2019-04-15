@@ -1,0 +1,73 @@
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+html, body, div, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, pre,
+	form, p, blockquote, fieldset, input, abbr, article, aside, command,
+	details, figcaption, figure, footer, header, hgroup, mark, meter, nav,
+	output, progress, section, summary, time {
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, pre, code, address, caption, cite, code, em,
+	strong, th, figcaption {
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+}
+
+fieldset, iframe {
+	border: none;
+}
+
+caption, th {
+	text-align: left;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+article, aside, footer, header, hgroup, nav, section, figure, figcaption
+	{
+	display: block;
+}
+
+body {
+	font-family: "微软雅黑", "Microsoft Yahei", Arial, Helvetica, sans-serif,
+		"宋体" ;
+	font-size: 14px;
+	min-width: 1080px;
+}
+
+ol, ul, li {
+	list-style: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+a {
+	color: #000;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+button {
+	cursor: pointer;
+}
+
+iframe {
+	frameborder: 0px;
+}
+
+.leaflet-bar a, .leaflet-bar a:hover {
+/* 	width: 36px !important;
+	height: 36px !important;
+	line-height: 36px !important; */
+}

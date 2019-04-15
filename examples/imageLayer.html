@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="../dist/version1.2/css/map-all.min.css" />
+    <style>
+      body {
+        height: 100%;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        background-color: rgba(231, 231, 231, 1);
+      }
+
+      .page-content,
+      .fullWindow {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-content">
+      <div id="mapDiv" class="fullWindow"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="../dist/version1.2/eshore.map.min.js"></script>
+    <script>
+      L.Icon.Default.imagePath = 'images/map/';
+      var drawnItems;
+      (function() {
+        var baseLayersConfigs = [
+          {
+            mapName: '图片',
+            cssmapImg: 'baseMapSwitch-vector',
+            layerType: 'image',
+            layerOption: {
+              url: 'images/seats.jpg',
+              bounds: [[0, 0], [4963, 7017]]
+            }
+          }
+        ];
+        var map = new EMap.Map('mapDiv', {
+          baseMapSwitchControl: { configs: baseLayersConfigs, show: false },
+          minZoom: -5,
+          zoom: -3,
+          center: [2480, 3500],
+          crs: L.CRS.Simple
+        });
+
+        var marker = L.marker([1870, 5716])
+          .bindPopup('我在这儿')
+          .addTo(map);
+        var warkLineJson = {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: [
+                  [4384, 2236],
+                  [4384, 1980],
+                  [4492, 1980],
+                  [4480, 1424],
+                  [5640, 1432],
+                  [5628, 1892],
+                  [5672, 1896]
+                ]
+              }
+            }
+          ]
+        };
+
+        L.geoJSON(warkLineJson, { color: 'red' }).addTo(map);
+
+        marker.openPopup();
+        drawnItems = L.featureGroup().addTo(map);
+        map.addControl(
+          new L.Control.Draw({
+            edit: {
+              featureGroup: drawnItems,
+              poly: {
+                allowIntersection: false
+              }
+            },
+            draw: {
+              polygon: {
+                allowIntersection: false,
+                showArea: true
+              }
+            }
+          })
+        );
+
+        map.on(L.Draw.Event.CREATED, function(event) {
+          var layer = event.layer;
+          drawnItems.addLayer(layer);
+        });
+      })();
+    </script>
+  </body>
+</html>

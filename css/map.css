@@ -1,0 +1,80 @@
+.baseMapSwitch-vector {
+  background: url(../images/map/vector.png) no-repeat;
+  width: 44px;
+  height: 42px;
+}
+
+.baseMapSwitch-image {
+  background: url(../images/map/image.png) no-repeat;
+  width: 43px;
+  height: 42px;
+}
+
+.marker-label {
+  font-size: 18px;
+  color: #fa0332;
+  font-weight: bolder;
+  text-align: center;
+  width: 130px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.pointIcon {
+  width: 12px;
+  height: 12px;
+  border-radius: 25px;
+  margin-left: -6px;
+  box-shadow: 3px 2px 5px #292121;
+  background: rgba(255, 0, 0, 0.62);
+}
+
+.legend {
+  padding: 6px 8px;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  line-height: 20px;
+  color: #555;
+}
+
+.legend i {
+  margin-right: 8px;
+  opacity: 0.7;
+  padding: 6px;
+  display: inline-block;
+}
+
+.leaflet-control-layers-toggle {
+  background-image: url(../images/map/layers.png);
+}
+
+.leaflet-div-icon {
+  background: rgba(255, 255, 255, 0);
+  border: 0 !important;
+}
+
+.layerInfo {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  color: #1e2832;
+}
+.layerInfo h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+.createMapPanel {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.leaflet-pane > canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+}

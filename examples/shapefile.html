@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="../dist/version1.2/css/map-all.min.css" />
+    <style>
+      body {
+        height: 100%;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        background-color: rgba(231, 231, 231, 1);
+      }
+
+      .page-content,
+      .fullWindow {
+        height: 100%;
+        width: 100%;
+      }
+      .file-control {
+        position: absolute;
+        top: 15px;
+        left: 100px;
+        z-index: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-content">
+      <div id="mapDiv" class="fullWindow"></div>
+      <form class="file-control">
+        <input id="shp_input" type="file" />
+        <input id="dbf_input" type="file" />
+        <button id="removebtn" type="button">清除</button>
+        <button id="addbtn" type="button">增加</button>
+        <button id="clearbtn" type="button">销毁</button>
+      </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="../dist/version1.2/eshore.map.min.js"></script>
+    <script src="../dist/modules/shapefile/shapefile.min.js"></script>
+    <script>
+      $(
+        (function() {
+          var baseLayersConfigs = [
+            {
+              mapName: '空图层',
+              cssmapImg: 'baseMapSwitch-vector',
+              layerType: 'none'
+            },
+            /*{
+		mapName : '天地图矢量',
+		cssmapImg : 'baseMapSwitch-vector',
+		layerType : 'wmts',
+		layerOption : {
+			url : "http://t{s}.tianditu.com/vec_c/wmts?SERVICE=WMTS",
+			subdomains : [ "0", "1", "2", "3", "4", "5", "6", "7" ],
+			layer : "vec",
+			style : "default",
+			tilematrixSet : "c",
+			format : "tiles",
+			tk:"60ff613465605f48e9571d1d19ffd5fc"
+		}
+	}*/ {
+              mapName: '天地图矢量',
+              layerType: 'tdt',
+              cssmapImg: 'baseMapSwitch-vector',
+              layerOption: {
+                crs_name: 'EPSG4490',
+                layer: 'vec',
+                layerTheme: 'Dark'
+              }
+            }
+          ];
+          var map = new EMap.Map('mapDiv', {
+            baseMapSwitchControl: {
+              configs: baseLayersConfigs,
+              show: true
+            },
+            minZoom: 1,
+            crs: L.CRS.EPSG4490
+          });
+
+          var shapeLayer = null;
+          var option = {
+            style: {
+              pointStyle: {
+                text_style: {
+                  font_color: 'black'
+                },
+                icon_style: {
+                  fillColor: 'blue'
+                },
+                label: {
+                  showZoom: 13
+                },
+                zIndex: 500
+              },
+              polygonStyle: {
+                weight: 1,
+                color: 'blue',
+                dashArray: '',
+                fillOpacity: 0.2
+              },
+              polylineStyle: {
+                weight: 1,
+                color: 'red',
+                dashArray: '',
+                opacity: 0.2
+              }
+            },
+            labelColumn: 'Name'
+          };
+          $('#shp_input').on('change', function(e) {
+            var files = e.target.files;
+            shapeLayer = EMap.Layers.shapeFileLayer(files, option);
+            shapeLayer.on('onfinished', function() {
+              map.addLayer(shapeLayer);
+            });
+            shapeLayer.on('click', function(e) {
+              var type = e.geometry_type;
+              resetLayerStyle(type);
+              clickHandle(e);
+            });
+          });
+
+          $('#dbf_input').on('change', function(e) {
+            var files = e.target.files;
+            shapeLayer.readFile(files);
+          });
+
+          $('#removebtn').on('click', function() {
+            map.removeLayer(shapeLayer);
+          });
+
+          $('#addbtn').on('click', function() {
+            map.addLayer(shapeLayer);
+          });
+
+          $('#clearbtn').on('click', function() {
+            shapeLayer.destroy();
+          });
+
+          var lastClickLayer;
+
+          function resetLayerStyle(type) {
+            if (lastClickLayer) {
+              var style;
+              if (type === 'polygon') {
+                style = option.style.polygonStyle;
+              } else if (type === 'polyline') {
+                style = option.style.polylineStyle;
+              }
+              lastClickLayer.setStyle(style);
+            }
+          }
+
+          function clickHandle(e) {
+            var attrs = e.obj;
+            var type = e.geometry_type;
+            if (type !== 'point') {
+              var layer = e.event.target;
+              layer.setStyle({
+                color: 'red'
+              });
+              layer.bindPopup(JSON.stringify(attrs)).openPopup();
+              lastClickLayer = layer;
+            } else {
+              alert(JSON.stringify(attrs));
+            }
+          }
+        })()
+      );
+    </script>
+  </body>
+</html>
