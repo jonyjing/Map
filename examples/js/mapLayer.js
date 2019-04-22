@@ -523,7 +523,7 @@
   layerControl.addOverlay(chartLayer, 'echart统计图');
   layerControl.addOverlay(echartMapLayer_scatter, 'echart统计散点图');
   layerControl.addOverlay(echartMapLayer_lines, 'echart线图');
-  layerControl.addOverlay(layer, '点标注');
+  layerControl.addOverlay(layer, '十万点标注');
   layerControl.addOverlay(layer2, '线标注');
   layerControl.addOverlay(layer3, '面标注');
 
