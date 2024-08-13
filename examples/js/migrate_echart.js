@@ -25,6 +25,7 @@
       layerType: 'tdt',
       cssmapImg: 'baseMapSwitch-vector',
       layerOption: {
+        crs_name: 'EPSG4490',
         layer: 'vec',
         layerTheme: 'Dark'
         /*bounds: L.latLngBounds(
@@ -38,6 +39,7 @@
       layerType: 'tdt',
       cssmapImg: 'baseMapSwitch-image',
       layerOption: {
+        crs_name: 'EPSG4490',
         layer: 'img'
       }
     }
@@ -47,7 +49,7 @@
     zoom: 4,
     center: [37.550339, 104.114129],
     baseMapSwitchControl: { configs: baseLayersConfigs, show: false },
-    crs: L.CRS.EPSG3857
+    crs: L.CRS.EPSG4490
   });
   var echartOptions_migrate = createChartOptions_migrate();
   var echartMapLayer_migrate = EMap.Layers.CanvasLayer.echartMap({
