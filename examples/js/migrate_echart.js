@@ -1,21 +1,46 @@
 (function() {
+  // var baseLayersConfigs = [
+  //   {
+  //     mapName: 'geoq_blue',
+  //     cssmapImg: 'baseMapSwitch-vector',
+  //     layerType: 'tile',
+  //     layerOption: {
+  //       url:
+  //         'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}'
+  //     }
+  //   },
+  //   {
+  //     mapName: 'geoq_community',
+  //     cssmapImg: 'baseMapSwitch-vector',
+  //     layerType: 'tile',
+  //     layerOption: {
+  //       url:
+  //         'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/{z}/{y}/{x}'
+  //     }
+  //   }
+  // ];
   var baseLayersConfigs = [
     {
-      mapName: 'geoq_blue',
+      mapName: '天地图矢量',
+      layerType: 'tdt',
       cssmapImg: 'baseMapSwitch-vector',
-      layerType: 'tile',
       layerOption: {
-        url:
-          'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}'
+        crs_name: 'EPSG4490',
+        layer: 'vec',
+        layerTheme: 'Dark'
+        /*bounds: L.latLngBounds(
+          L.latLng(25.4163, 109.6299),
+          L.latLng(20.0595, 117.3593)
+        )*/
       }
     },
     {
-      mapName: 'geoq_community',
-      cssmapImg: 'baseMapSwitch-vector',
-      layerType: 'tile',
+      mapName: '天地图影像',
+      layerType: 'tdt',
+      cssmapImg: 'baseMapSwitch-image',
       layerOption: {
-        url:
-          'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/{z}/{y}/{x}'
+        crs_name: 'EPSG4490',
+        layer: 'img'
       }
     }
   ];
