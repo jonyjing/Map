@@ -25,7 +25,7 @@
       layerType: 'tdt',
       cssmapImg: 'baseMapSwitch-vector',
       layerOption: {
-        crs_name: 'EPSG4490',
+        crs_name: 'EPSG3857',
         layer: 'vec',
         layerTheme: 'Dark'
         /*bounds: L.latLngBounds(
@@ -39,7 +39,7 @@
       layerType: 'tdt',
       cssmapImg: 'baseMapSwitch-image',
       layerOption: {
-        crs_name: 'EPSG4490',
+        crs_name: 'EPSG3857',
         layer: 'img'
       }
     }
